@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dev.teabar.model.OrderList;
 import dev.teabar.model.Tea;
 import dev.teabar.util.DBUtil;
 
@@ -17,7 +18,7 @@ public class TeaDAO {
 
 	// Create // add
 	public void add(Tea tea) {
-		String query = "insert into tea (name, size, price) values(?, ?, ?)";
+		String query = "insert into teamenu (name, size, price) values(?, ?, ?)";
 
 		try (Connection connection = DBUtil.getConnection();
 				PreparedStatement ps = connection.prepareStatement(query)) {
@@ -38,7 +39,7 @@ public class TeaDAO {
 
 	// Read
 	public List<Tea> findAll() {
-		final String selectQuery = "SELECT * FROM tea";
+		final String selectQuery = "SELECT * FROM teamenu";
 		List<Tea> teas = new ArrayList<>();
 
 		try (Connection con = DBUtil.getConnection();
@@ -60,10 +61,36 @@ public class TeaDAO {
 
 		return teas;
 	}
+	
+	// Read OrderList
+	public List<OrderList> findOrderList() {
+		final String selectQuery = "SELECT * FROM orderlist";
+		List<OrderList> orders = new ArrayList<>();
+
+		try (Connection con = DBUtil.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(selectQuery);
+				ResultSet rs = pstmt.executeQuery();) {
+
+			while (rs.next()) {
+				final int id = rs.getInt("id");
+				final String name = rs.getString("name");
+				final String size = rs.getString("size");
+				final int price = rs.getInt("price");
+				final int quantity = rs.getInt("quantity");
+
+				orders.add(new OrderList(id, name, size, price, quantity));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return orders;
+	}
 
 	// Update
 	public void update(Tea tea) {
-		String query = "update tea set name = ?, size =?, price=? WHERE id = ?";
+		String query = "update teamenu set name = ?, size =?, price=? WHERE id = ?";
 
 		try (Connection connection = DBUtil.getConnection();
 				PreparedStatement ps = connection.prepareStatement(query)) {
@@ -84,7 +111,7 @@ public class TeaDAO {
 
 	// Delete
 	public void deleteAll(int tea_id) {
-		String query = "delete from tea where id = ?";
+		String query = "delete from teamenu where id = ?";
 
 		try (Connection connection = DBUtil.getConnection();
 				PreparedStatement ps = connection.prepareStatement(query)) {

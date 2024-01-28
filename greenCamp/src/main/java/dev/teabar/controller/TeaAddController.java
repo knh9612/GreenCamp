@@ -1,6 +1,7 @@
 package dev.teabar.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,8 +13,6 @@ import dev.teabar.model.Tea;
 
 @WebServlet("/teas/add")
 public class TeaAddController extends HttpServlet{
-	
-	
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

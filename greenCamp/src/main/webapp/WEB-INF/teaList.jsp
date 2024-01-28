@@ -31,6 +31,7 @@
 						<td>${tea.name}</td>
 						<td>${tea.size}</td>
 						<td>${tea.price}</td>
+						
 					</tr>
 				</c:forEach>
 			</c:otherwise>

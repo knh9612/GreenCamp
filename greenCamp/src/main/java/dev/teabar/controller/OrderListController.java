@@ -16,7 +16,7 @@ import dev.teabar.model.OrderList;
 @WebServlet("/orders")
 public class OrderListController extends HttpServlet {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		TeaDAO teaDAO = new TeaDAO();
 		List<OrderList> orders = teaDAO.findOrderList();
 		

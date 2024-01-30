@@ -33,6 +33,4 @@ public class TeaListController extends HttpServlet{
 		
 		dispatcher.forward(request, response); // 실제 이동 진행시켜
 	}
-	
-	
 }
